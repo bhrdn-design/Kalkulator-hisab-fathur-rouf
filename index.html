@@ -6,7 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-:root { --ink: #000; --paper: #fff; --muted: #444; --line: #222; --panel: #fff; --accent: #efefef; --danger: #f9e8e8; --ok: #eaf7ea; --page-h: 297mm; }
+:root { 
+  --ink: #000; --paper: #fff; --muted: #444; --line: #222; 
+  --panel: #fff; --accent: #efefef; --danger: #f9e8e8; --ok: #eaf7ea; 
+  --page-h: 297mm; 
+}
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #e4e4e4; line-height: 1.4; }
 .arabic, [dir="rtl"] { font-family: "Amiri", "Scheherazade New", "Times New Roman", serif; direction: rtl; unicode-bidi: isolate; }
@@ -91,14 +95,11 @@ th { font-weight: bold; background: #f3f3f3; }
 .glossary-wrap dt { font-weight:700; margin-top:10px; color:#0056b3; }
 .glossary-wrap dd { margin:2px 0 0 0; font-size:13px; line-height:1.5; color:#222; }
 
-/* Editor Data Tabel (Mendukung Konsep Spreadsheet) */
+/* Editor Data Tabel */
 .editor-wrap { margin-top: 20px; background:#fffefa; border:2px solid #d4af37; border-radius:8px; padding:16px; display:none; }
 .editor-wrap.show { display:block; }
 .editor-wrap h3 { color:#7a5c00; border-bottom:2px solid #d4af37; padding-bottom:6px; }
 .editor-grid { margin-top:10px; max-height:520px; overflow:auto; border:1px solid #ddd; padding:10px; border-radius:6px; background:#fafafa; }
-.editor-field { background:#fff; border:1px solid #ccc; border-radius:4px; padding:6px; }
-.editor-field label { margin:0 0 4px; font-size:11px; }
-.editor-field input { padding:5px; font-size:12px; }
 .editor-actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
 .editor-actions button { width:auto; padding:8px 14px; }
 .editor-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
@@ -124,7 +125,6 @@ table.editor-table td.rowkey input { width:56px; font-weight:700; }
 .save-status.ok { background:#eaf7ea; color:#0a5a0a; border: 1px solid #0a5a0a; }
 .save-status.err { background:#f9e8e8; color:#7a0000; border: 1px solid #7a0000; }
 
-/* Tampilan Aksi Baris Bergaya Excel */
 .editor-row-actions { display:flex; flex-direction:row; gap:4px; justify-content:center; align-items:center; flex-wrap:wrap; }
 .mini-btn { width:auto !important; padding:4px 6px !important; font-size:11px !important; text-transform:none !important; font-weight:700 !important; background:#0a5a0a !important; color:#fff !important; border-color:#083 !important; border-radius:3px !important; line-height:1; }
 .mini-btn.below { background:#0056b3 !important; border-color:#004494 !important; }
@@ -170,8 +170,8 @@ table.editor-table td.rowkey input { width:56px; font-weight:700; }
 <span class="verif-tag verif-yes">Terverifikasi</span><br>
 Data parameter berdasarkan tabel Fathur Ro'uf al-Manan. Semua konstanta tabel dapat diedit, ditambah, dan dihapus seperti Spreadsheet Excel melalui "Editor Data Tabel Kitab" di bawah.
 <ul>
-<li>Hasil hisab bersifat estimasi berbasis rumus kitab klasik, bukan pengganti rukyatul hilal maupun keputusan sidang isbat resmi.</li>
-<li>Silakan cocokkan kembali dengan kitab fisik / ahli falak setempat sebelum digunakan untuk keputusan syar'i.</li>
+<li>Visualisasi SVG tinggi Hilal digabungkan dan berubah otomatis sesuai penyesuaian Hari Ru'yah/Istikmal.</li>
+<li>Hasil hisab bersifat estimasi berbasis rumus kitab klasik. Silakan cocokkan kembali dengan ahli falak setempat sebelum digunakan untuk keputusan syar'i.</li>
 </ul>
 </div>
 
@@ -186,7 +186,7 @@ Data parameter berdasarkan tabel Fathur Ro'uf al-Manan. Semua konstanta tabel da
 <div class="row4">
 <input id="latD" type="number" value="7" placeholder="°">
 <input id="latM" type="number" min="0" max="59" value="0" placeholder="′">
-<input id="latS" type="number" min="0" max="59" value="0" placeholder="′′">
+<input id="latS" type="number" min="0" max="59" value="0" placeholder="″">
 <select id="latDir"><option value="S">Selatan</option><option value="N">Utara</option></select>
 </div>
 
@@ -194,7 +194,7 @@ Data parameter berdasarkan tabel Fathur Ro'uf al-Manan. Semua konstanta tabel da
 <div class="row4">
 <input id="lonD" type="number" value="110" placeholder="°">
 <input id="lonM" type="number" min="0" max="59" value="24" placeholder="′">
-<input id="lonS" type="number" min="0" max="59" value="0" placeholder="′′">
+<input id="lonS" type="number" min="0" max="59" value="0" placeholder="″">
 <select id="lonDir"><option value="E">Timur</option><option value="W">Barat</option></select>
 </div>
 
@@ -295,7 +295,7 @@ const NAMA_HARI = ['Sabtu', 'Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']
 const NAMA_PASARAN = ['Kliwon', 'Legi', 'Pahing', 'Pon', 'Wage'];
 const NAMA_BULAN_MASEHI = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-// --- TABEL DATA ASLI ---
+// --- TABEL DATA ASLI (Fathur Ro'uf al-Manan) ---
 const DATA_KITAB = {
 tahunMajmuah: { data: [
 {tahun:1310,alamah:{m:6,sa:21,da:58},hissah:{b:2,d:29,m:54},wasath:{b:3,d:24,m:9},khasah:{b:7,d:16,m:1},markaz:{b:0,d:13,m:19}},
@@ -456,35 +456,35 @@ ardQamar:{step:1,rows:{
 }}
 };
 
-// --- PARSER DATA ---
+// --- DATA PARSER ---
 function parsePair(str){ const [d, m] = str.split(':').map(Number); return {d: d || 0, m: m || 0, s: 0}; }
 for(const [key, cfg] of Object.entries(TABLE_STRINGS)){
-DATA_KITAB[key] = {step: cfg.step, data: {}};
-for(const [deg, row] of Object.entries(cfg.rows)){
-DATA_KITAB[key].data[deg] = row.trim().split(/\s+/).map(parsePair);
-}
+  DATA_KITAB[key] = {step: cfg.step, data: {}};
+  for(const [deg, row] of Object.entries(cfg.rows)){
+    DATA_KITAB[key].data[deg] = row.trim().split(/\s+/).map(parsePair);
+  }
 }
 
 // --- OVERRIDE STORAGE (Editor Data) ---
 const LS_KEY = 'falak_override_v1';
 function loadOverrides() {
-try { const raw = localStorage.getItem(LS_KEY); if(!raw) return null; return JSON.parse(raw); } catch(e) { return null; }
+  try { const raw = localStorage.getItem(LS_KEY); if(!raw) return null; return JSON.parse(raw); } catch(e) { return null; }
 }
 function applyOverrides() {
-const ov = loadOverrides();
-if(!ov) return;
-try {
-if(ov.tahunMajmuah) DATA_KITAB.tahunMajmuah.data = JSON.parse(JSON.stringify(ov.tahunMajmuah));
-if(ov.tahunMabsuthah) DATA_KITAB.tahunMabsuthah.data = JSON.parse(JSON.stringify(ov.tahunMabsuthah));
-if(ov.bulanIjtima) DATA_KITAB.bulanIjtima.data = JSON.parse(JSON.stringify(ov.bulanIjtima));
-['tadilKhasah','tadilMarkaz','tadilAyyam','hissahSaah','ardQamar'].forEach(tk => {
-if(ov[tk]) DATA_KITAB[tk].data = JSON.parse(JSON.stringify(ov[tk]));
-});
-} catch(e) { console.error('Gagal apply override', e); }
+  const ov = loadOverrides();
+  if(!ov) return;
+  try {
+    if(ov.tahunMajmuah) DATA_KITAB.tahunMajmuah.data = JSON.parse(JSON.stringify(ov.tahunMajmuah));
+    if(ov.tahunMabsuthah) DATA_KITAB.tahunMabsuthah.data = JSON.parse(JSON.stringify(ov.tahunMabsuthah));
+    if(ov.bulanIjtima) DATA_KITAB.bulanIjtima.data = JSON.parse(JSON.stringify(ov.bulanIjtima));
+    ['tadilKhasah','tadilMarkaz','tadilAyyam','hissahSaah','ardQamar'].forEach(tk => {
+      if(ov[tk]) DATA_KITAB[tk].data = JSON.parse(JSON.stringify(ov[tk]));
+    });
+  } catch(e) { console.error('Gagal apply override', e); }
 }
 applyOverrides();
 
-// --- UTILS & MATH CORE ---
+// --- UTILS & MATH ---
 function zpad(num) { return String(Math.trunc(Math.abs(num))).padStart(2, '0'); }
 function h(v) { return (v === undefined || v === null) ? '<span class="num">00</span>' : `<span class="num">${zpad(v)}</span>`; }
 function numCell(v) { return `<td>${h(v)}</td>`; }
@@ -494,233 +494,402 @@ function angleCells(o) { return `${numCell(o.b)}${numCell(o.d)}${numCell(o.m)}`;
 function pairTimeCells(o) { return `${numCell(o.m || 0)}${numCell(o.sa || 0)}${numCell(o.da || 0)}`; }
 function arcToTimeLike(o) { return {m: 0, sa: Number(o.d || 0), da: Number(o.m || 0), s: Number(o.s || 0)}; }
 function mod(n, m) { return ((n % m) + m) % m; }
-function normDMSFromSeconds(sec) { let s = Math.round(sec); let sign = s < 0 ? -1 : 1; s = Math.abs(s); let d = Math.floor(s / 3600); let m = Math.floor((s % 3600) / 60); s = s % 60; return {d: d * sign, m, s}; }
+
+function normDMSFromSeconds(sec) { 
+  let s = Math.round(sec); 
+  let sign = s < 0 ? -1 : 1; 
+  s = Math.abs(s); 
+  let d = Math.floor(s / 3600); 
+  let m = Math.floor((s % 3600) / 60); 
+  s = s % 60; 
+  return {d: d * sign, m, s}; 
+}
 function pairSec(o) { return (Number(o.d || 0) * 3600) + (Number(o.m || 0) * 60) + Number(o.s || 0); }
 function angleSec(o) { return ((Number(o.b || 0) * 30 + Number(o.d || 0)) * 3600) + (Number(o.m || 0) * 60) + Number(o.s || 0); }
 function timeTotalMinutes(o) { return ((Number(o.m || 0) - 1) * 1440) + (Number(o.sa || 0) * 60) + Number(o.da || 0); }
-function normalizeTimeFromMinutes(total) { total = mod(Math.round(total), 7 * 1440); let m = Math.floor(total / 1440) + 1; let rem = total % 1440; return {m, sa: Math.floor(rem / 60), da: rem % 60}; }
-function addTime(a, b) { let da = Number(a.da || 0) + Number(b.da || 0); let sa = Number(a.sa || 0) + Number(b.sa || 0) + Math.floor(da / 60); let m = Number(a.m || 0) + Number(b.m || 0) + Math.floor(sa / 24); m = mod(m - 1, 7) + 1; return {m, sa: mod(sa, 24), da: mod(da, 60)}; }
+
+function normalizeTimeFromMinutes(total) { 
+  total = mod(Math.round(total), 7 * 1440); 
+  let m = Math.floor(total / 1440) + 1; 
+  let rem = total % 1440; 
+  return {m, sa: Math.floor(rem / 60), da: rem % 60}; 
+}
+
+function addTime(a, b) { 
+  let da = Number(a.da || 0) + Number(b.da || 0); 
+  let sa = Number(a.sa || 0) + Number(b.sa || 0) + Math.floor(da / 60); 
+  let m = Number(a.m || 0) + Number(b.m || 0) + Math.floor(sa / 24); 
+  m = mod(m - 1, 7) + 1; 
+  return {m, sa: mod(sa, 24), da: mod(da, 60)}; 
+}
 function addTimeMinutes(a, addMin) { return normalizeTimeFromMinutes(timeTotalMinutes(a) + Number(addMin || 0)); }
-function addAngle(a, b) { let mm = Number(a.m || 0) + Number(b.m || 0); let dd = Number(a.d || 0) + Number(b.d || 0) + Math.floor(mm / 60); let bb = Number(a.b || 0) + Number(b.b || 0) + Math.floor(dd / 30); return {b: mod(bb, 12), d: mod(dd, 30), m: mod(mm, 60)}; }
+function addAngle(a, b) { 
+  let mm = Number(a.m || 0) + Number(b.m || 0); 
+  let dd = Number(a.d || 0) + Number(b.d || 0) + Math.floor(mm / 60); 
+  let bb = Number(a.b || 0) + Number(b.b || 0) + Math.floor(dd / 30); 
+  return {b: mod(bb, 12), d: mod(dd, 30), m: mod(mm, 60)}; 
+}
 function addArc(a, b) { return normDMSFromSeconds(pairSec(a) + pairSec(b)); }
-function diffArc(a, b) { let A = pairSec(a), B = pairSec(b); let sign = A > B ? 1 : (A < B ? -1 : 0); let r = normDMSFromSeconds(Math.abs(A - B)); r._sign = sign; return r; }
-function nextTablePoint(tableKey, degree, buruj) { const table = DATA_KITAB[tableKey]; let deg = degree, b = buruj; if(deg >= 30) { deg = 0; b = mod(b + 1, 12); } if (tableKey === 'ardQamar') { b = mod(b, 6); } let row = table.data[String(deg)]; return (row && row[b]) ? row[b] : {d: 0, m: 0, s: 0}; }
-function lookupTable(tableKey, arg, stepOverride) { const table = DATA_KITAB[tableKey]; const step = stepOverride || table.step || 1; let buruj = mod(Number(arg.b || 0), 12); if (tableKey === 'ardQamar') { buruj = mod(buruj, 6); } const deg = Number(arg.d || 0); const min = Number(arg.m || 0); let lowerDeg = deg - (deg % step); let upperDeg = lowerDeg + step; let s1 = nextTablePoint(tableKey, lowerDeg, buruj); let s2 = nextTablePoint(tableKey, upperDeg, buruj); let fadhl = diffArc(s1, s2); let kasr = step === 5 ? (mod(deg, 5) * 12) + (min / 5) : min; let hasilDharbSec = Math.round((pairSec(fadhl) * kasr) / 60); let hd = normDMSFromSeconds(hasilDharbSec); let mathlubSec = pairSec(s1); if (pairSec(s1) > pairSec(s2)) { mathlubSec -= hasilDharbSec; } else { mathlubSec += hasilDharbSec; } return {madkhul: {d: lowerDeg, m: min}, kasr: Math.round(kasr), s1, s2, fadhl, hd, mathlub: normDMSFromSeconds(mathlubSec)}; }
+function diffArc(a, b) { 
+  let A = pairSec(a), B = pairSec(b); 
+  let sign = A > B ? 1 : (A < B ? -1 : 0); 
+  let r = normDMSFromSeconds(Math.abs(A - B)); 
+  r._sign = sign; 
+  return r; 
+}
+
+function nextTablePoint(tableKey, degree, buruj) { 
+  const table = DATA_KITAB[tableKey]; 
+  let deg = degree, b = buruj; 
+  if(deg >= 30) { deg = 0; b = mod(b + 1, 12); } 
+  if (tableKey === 'ardQamar') { b = mod(b, 6); } 
+  let row = table.data[String(deg)]; 
+  return (row && row[b]) ? row[b] : {d: 0, m: 0, s: 0}; 
+}
+
+function lookupTable(tableKey, arg, stepOverride) { 
+  const table = DATA_KITAB[tableKey]; 
+  const step = stepOverride || table.step || 1; 
+  let buruj = mod(Number(arg.b || 0), 12); 
+  if (tableKey === 'ardQamar') { buruj = mod(buruj, 6); } 
+  const deg = Number(arg.d || 0); 
+  const min = Number(arg.m || 0); 
+  
+  let lowerDeg = deg - (deg % step); 
+  let upperDeg = lowerDeg + step; 
+  let s1 = nextTablePoint(tableKey, lowerDeg, buruj); 
+  let s2 = nextTablePoint(tableKey, upperDeg, buruj); 
+  
+  let fadhl = diffArc(s1, s2); 
+  let kasr = step === 5 ? (mod(deg, 5) * 12) + (min / 5) : min; 
+  let hasilDharbSec = Math.round((pairSec(fadhl) * kasr) / 60); 
+  let hd = normDMSFromSeconds(hasilDharbSec); 
+  
+  let mathlubSec = pairSec(s1); 
+  if (pairSec(s1) > pairSec(s2)) { mathlubSec -= hasilDharbSec; } else { mathlubSec += hasilDharbSec; } 
+  
+  return {madkhul: {d: lowerDeg, m: min}, kasr: Math.round(kasr), s1, s2, fadhl, hd, mathlub: normDMSFromSeconds(mathlubSec)}; 
+}
+
 function degToMinutes(o) { return (Number(o.d || 0) * 60) + Number(o.m || 0) + (Number(o.s || 0) / 60); }
-function parseDMSValue(prefix) { let d = Number(document.getElementById(prefix + 'D').value || 0); let m = Number(document.getElementById(prefix + 'M').value || 0); let s = Number(document.getElementById(prefix + 'S').value || 0); let dir = document.getElementById(prefix + 'Dir').value; let dec = d + (m / 60) + (s / 3600); if(dir === 'S' || dir === 'W') dec *= -1; return dec; }
-function getZona() { let z = document.getElementById('zona').value; return z === 'manual' ? Number(document.getElementById('zonaManual').value || 0) : Number(z); }
-function getFadlMinutes() { let mode = document.getElementById('fadlMode').value; if(mode === 'kitab') return 10; if(mode === 'manual') return Number(document.getElementById('fadlManual').value || 0); let lon = parseDMSValue('lon'), tz = getZona(); return Math.round((lon - (tz * 15)) * 4 * 100) / 100; }
+function parseDMSValue(prefix) { 
+  let d = Number(document.getElementById(prefix + 'D').value || 0); 
+  let m = Number(document.getElementById(prefix + 'M').value || 0); 
+  let s = Number(document.getElementById(prefix + 'S').value || 0); 
+  let dir = document.getElementById(prefix + 'Dir').value; 
+  let dec = d + (m / 60) + (s / 3600); 
+  if(dir === 'S' || dir === 'W') dec *= -1; 
+  return dec; 
+}
+function getZona() { 
+  let z = document.getElementById('zona').value; 
+  return z === 'manual' ? Number(document.getElementById('zonaManual').value || 0) : Number(z); 
+}
+function getFadlMinutes() { 
+  let mode = document.getElementById('fadlMode').value; 
+  if(mode === 'kitab') return 10; 
+  if(mode === 'manual') return Number(document.getElementById('fadlManual').value || 0); 
+  let lon = parseDMSValue('lon'), tz = getZona(); 
+  return Math.round((lon - (tz * 15)) * 4 * 100) / 100; 
+}
 function islamicToJD(y, m, d) { return Math.floor((11 * y + 3) / 30) + 354 * y + 30 * m - Math.floor((m - 1) / 2) + d + 1948440 - 385; }
-function jdToGregorian(jd) { let l = jd + 68569; let n = Math.floor((4 * l) / 146097); l = l - Math.floor((146097 * n + 3) / 4); let i = Math.floor((4000 * (l + 1)) / 1461001); l = l - Math.floor((1461 * i) / 4) + 31; let j = Math.floor((80 * l) / 2447); let day = l - Math.floor((2447 * j) / 80); l = Math.floor(j / 11); let month = j + 2 - (12 * l); let year = 100 * (n - 49) + i + l; return {y: year, m: month, d: day}; }
+function jdToGregorian(jd) { 
+  let l = jd + 68569; 
+  let n = Math.floor((4 * l) / 146097); 
+  l = l - Math.floor((146097 * n + 3) / 4); 
+  let i = Math.floor((4000 * (l + 1)) / 1461001); 
+  l = l - Math.floor((1461 * i) / 4) + 31; 
+  let j = Math.floor((80 * l) / 2447); 
+  let day = l - Math.floor((2447 * j) / 80); 
+  l = Math.floor(j / 11); 
+  let month = j + 2 - (12 * l); 
+  let year = 100 * (n - 49) + i + l; 
+  return {y: year, m: month, d: day}; 
+}
 function dowKitabFromJD(jd) { return ((jd + 1) % 7) + 1; }
-function findNearbyJDWithDow(approxJD, dowKitab) { let best = approxJD, bestAbs = 99; for(let i = -5; i <= 5; i++) { let jd = approxJD + i; if(dowKitabFromJD(jd) === dowKitab && Math.abs(i) < bestAbs) { best = jd; bestAbs = Math.abs(i); } } return best; }
+function findNearbyJDWithDow(approxJD, dowKitab) { 
+  let best = approxJD, bestAbs = 99; 
+  for(let i = -5; i <= 5; i++) { 
+    let jd = approxJD + i; 
+    if(dowKitabFromJD(jd) === dowKitab && Math.abs(i) < bestAbs) { best = jd; bestAbs = Math.abs(i); } 
+  } 
+  return best; 
+}
 function pasaranFromJD(jd) { return mod(jd + 1, 5); }
 function dateFromJD(jd) { let g = jdToGregorian(jd); return {...g, jd, pasaran: pasaranFromJD(jd), dow: dowKitabFromJD(jd)}; }
-function getCalendarResult(targetYear, targetMonth, istikmal, ijtimaDow) { let prevMonth = targetMonth === 1 ? 12 : targetMonth - 1; let prevYear = targetMonth === 1 ? targetYear - 1 : targetYear; let approxIjtimaJD = islamicToJD(prevYear, prevMonth, 29); let ijtimaJD = findNearbyJDWithDow(approxIjtimaJD, ijtimaDow); let awalJD = ijtimaJD + (istikmal ? 2 : 1); return {ijtima: dateFromJD(ijtimaJD), awal: dateFromJD(awalJD), prevMonth, prevYear}; }
+function getCalendarResult(targetYear, targetMonth, istikmal, ijtimaDow) { 
+  let prevMonth = targetMonth === 1 ? 12 : targetMonth - 1; 
+  let prevYear = targetMonth === 1 ? targetYear - 1 : targetYear; 
+  let approxIjtimaJD = islamicToJD(prevYear, prevMonth, 29); 
+  let ijtimaJD = findNearbyJDWithDow(approxIjtimaJD, ijtimaDow); 
+  let awalJD = ijtimaJD + (istikmal ? 2 : 1); 
+  return {ijtima: dateFromJD(ijtimaJD), awal: dateFromJD(awalJD), prevMonth, prevYear}; 
+}
 function fmtDate(o) { return `${zpad(o.d)} ${NAMA_BULAN_MASEHI[o.m - 1]} ${o.y} M`; }
 function fmtDMS(o) { return `${zpad(o.d)}° ${zpad(o.m)}'${o.s ? ` ${zpad(o.s)}"` : ''}`; }
 function fmtHMS(o) { return `${zpad(o.sa)}:${zpad(o.da)}`; }
-function cariBarisMajmuah(sanahTam) { const list = DATA_KITAB.tahunMajmuah.data; let candidate = null; for(const row of list) { if(row.tahun <= sanahTam) { if(!candidate || row.tahun > candidate.tahun) candidate = row; } } return candidate; }
+function cariBarisMajmuah(sanahTam) { 
+  const list = DATA_KITAB.tahunMajmuah.data; 
+  let candidate = null; 
+  for(const row of list) { if(row.tahun <= sanahTam) { if(!candidate || row.tahun > candidate.tahun) candidate = row; } } 
+  return candidate; 
+}
 
 // --- GPS FUNCTION ---
 function getGPS() {
-if (!navigator.geolocation) { alert("Fitur GPS tidak didukung."); return; }
-const btn = document.getElementById('btnGPS'); btn.innerText = "⏳ Melacak...";
-navigator.geolocation.getCurrentPosition(async (pos) => {
-const lat = pos.coords.latitude, lon = pos.coords.longitude;
-const latAbs = Math.abs(lat);
-document.getElementById('latD').value = Math.floor(latAbs);
-document.getElementById('latM').value = Math.floor((latAbs % 1) * 60);
-document.getElementById('latS').value = Math.floor((((latAbs % 1) * 60) % 1) * 60);
-document.getElementById('latDir').value = lat >= 0 ? 'N' : 'S';
-const lonAbs = Math.abs(lon);
-document.getElementById('lonD').value = Math.floor(lonAbs);
-document.getElementById('lonM').value = Math.floor((lonAbs % 1) * 60);
-document.getElementById('lonS').value = Math.floor((((lonAbs % 1) * 60) % 1) * 60);
-document.getElementById('lonDir').value = lon >= 0 ? 'E' : 'W';
-try {
-const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
-const data = await res.json();
-if(data && data.display_name) {
-let city = data.address.city || data.address.town || data.address.village || "";
-let name = data.display_name.split(',')[0];
-document.getElementById('markaz').value = city ? `${name}, ${city}` : name;
-}
-} catch(e) {}
-btn.innerText = "📍 Gunakan GPS";
-document.getElementById('btnHitung').click();
-}, (err) => { alert("Gagal akses GPS."); btn.innerText = "📍 Gunakan GPS"; });
+  if (!navigator.geolocation) { alert("Fitur GPS tidak didukung."); return; }
+  const btn = document.getElementById('btnGPS'); btn.innerText = "⏳ Melacak...";
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const lat = pos.coords.latitude, lon = pos.coords.longitude;
+    const latAbs = Math.abs(lat);
+    document.getElementById('latD').value = Math.floor(latAbs);
+    document.getElementById('latM').value = Math.floor((latAbs % 1) * 60);
+    document.getElementById('latS').value = Math.floor((((latAbs % 1) * 60) % 1) * 60);
+    document.getElementById('latDir').value = lat >= 0 ? 'N' : 'S';
+    
+    const lonAbs = Math.abs(lon);
+    document.getElementById('lonD').value = Math.floor(lonAbs);
+    document.getElementById('lonM').value = Math.floor((lonAbs % 1) * 60);
+    document.getElementById('lonS').value = Math.floor((((lonAbs % 1) * 60) % 1) * 60);
+    document.getElementById('lonDir').value = lon >= 0 ? 'E' : 'W';
+    
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+      const data = await res.json();
+      if(data && data.display_name) {
+        let city = data.address.city || data.address.town || data.address.village || "";
+        let name = data.display_name.split(',')[0];
+        document.getElementById('markaz').value = city ? `${name}, ${city}` : name;
+      }
+    } catch(e) {}
+    btn.innerText = "📍 Gunakan GPS";
+    document.getElementById('btnHitung').click();
+  }, (err) => { alert("Gagal akses GPS."); btn.innerText = "📍 Gunakan GPS"; });
 }
 
 // --- CORE CALCULATION ---
 function hitungFalak() {
-try {
-const targetBulan = parseInt(document.getElementById('bulanHijri').value, 10);
-const targetTahun = parseInt(document.getElementById('tahunHijri').value, 10);
-const markaz = document.getElementById('markaz').value.trim() || '-';
-if(!targetBulan || !targetTahun) throw new Error('Isi parameter dengan benar.');
-const sanahTam = targetBulan === 1 ? targetTahun - 1 : targetTahun;
-const bulanTam = targetBulan === 1 ? 12 : targetBulan - 1;
-let maj = cariBarisMajmuah(sanahTam - 1);
-if(!maj) throw new Error('Tahun di luar tabel majmuah yang tersedia.');
-let rem = (sanahTam - 1) - maj.tahun;
-let zero = {tahun: 0, alamah: {m: 0, sa: 0, da: 0}, hissah: {b: 0, d: 0, m: 0}, wasath: {b: 0, d: 0, m: 0}, khasah: {b: 0, d: 0, m: 0}, markaz: {b: 0, d: 0, m: 0}};
-let mab = rem === 0 ? zero : DATA_KITAB.tahunMabsuthah.data.find(r => r.tahun === rem);
-if(!mab) throw new Error('Tahun mabsuthah tidak ditemukan.');
-let bln = DATA_KITAB.bulanIjtima.data.find(r => r.index === bulanTam);
-let h_alamah = addTime(addTime(maj.alamah, mab.alamah), bln.alamah);
-let h_hissah = addAngle(addAngle(maj.hissah, mab.hissah), bln.hissah);
-let h_wasath = addAngle(addAngle(maj.wasath, mab.wasath), bln.wasath);
-let h_khasah = addAngle(addAngle(maj.khasah, mab.khasah), bln.khasah);
-let h_markaz = addAngle(addAngle(maj.markaz, mab.markaz), bln.markaz);
-let fadlMin = getFadlMinutes();
-let muwafaqah = addTimeMinutes(h_alamah, fadlMin);
-let k1 = lookupTable('tadilKhasah', h_khasah, 1);
-let k2 = lookupTable('tadilMarkaz', h_markaz, 1);
-let buduGhoir = addArc(k1.mathlub, k2.mathlub);
-let buduGhoirMin = degToMinutes(buduGhoir);
-let h5xSec = Math.round(buduGhoirMin * 5);
-let h5x = normDMSFromSeconds(h5xSec);
-let tadilSyams = addArc(k2.mathlub, h5x);
-let k4 = lookupTable('hissahSaah', h_khasah, 5);
-let k5 = lookupTable('ardQamar', h_hissah, 1);
-let ts_sec = pairSec(tadilSyams);
-let ws_sec = angleSec(h_wasath);
-let ms_sec = ws_sec - ts_sec;
-if(ms_sec < 0) ms_sec += 12 * 30 * 3600;
-let muqowwam = {b: Math.floor(ms_sec / (30 * 3600)) % 12, d: Math.floor((ms_sec % (30 * 3600)) / 3600), m: Math.floor((ms_sec % 3600) / 60)};
-let k6 = lookupTable('tadilAyyam', muqowwam, 5);
-let buduMuaddal = addArc(buduGhoir, k6.mathlub);
-let tAlamahSeconds = Math.round(degToMinutes(buduMuaddal) * degToMinutes(k4.mathlub));
-let tadilAlamah = normDMSFromSeconds(tAlamahSeconds);
-let aMin = timeTotalMinutes(muwafaqah) - Math.round(tAlamahSeconds / 60);
-let aMuaddalah = normalizeTimeFromMinutes(aMin);
-let umurMenit = (24 * 60) - (aMuaddalah.sa * 60 + aMuaddalah.da);
-if(umurMenit < 0) umurMenit += 24 * 60;
-let umurMenitBase = umurMenit;
-let umurBulan = {m: 0, sa: Math.floor(umurMenit / 60), da: umurMenit % 60};
-let irtifaSec = umurMenit * 30;
-let irtifa = normDMSFromSeconds(irtifaSec);
-let muktsSec = Math.floor(irtifaSec / 15);
-let mukts = {d: 0, m: Math.floor(muktsSec / 60), s: muktsSec % 60};
-let ardhTimes4Sec = Math.round(pairSec(k5.mathlub) / 15);
-let ardhTimes4 = {d: 0, m: Math.floor(ardhTimes4Sec / 60), s: ardhTimes4Sec % 60};
-let qausSec = ardhTimes4Sec + muktsSec;
-let qaus = {d: 0, m: Math.floor(qausSec / 60), s: qausSec % 60};
-let cahayaJari = (qausSec / 240).toFixed(2);
-let b = muqowwam.b;
-let arah = [11, 0, 1, 2, 3, 4].includes(b) ? 'Utara Matahari / شمالية' : 'Selatan Matahari / جنوبية';
-let posisi = [11, 0, 1, 2, 3, 4].includes(b) ? 'Miring ke Selatan / جنوبية' : 'Miring ke Utara / شمالية';
-let istikmal = irtifa.d < 3;
-let cal = getCalendarResult(targetTahun, targetBulan, istikmal, aMuaddalah.m);
-let jamNasional = (aMuaddalah.sa + 18) % 24;
-let menitNasional = aMuaddalah.da;
-let data = { sanahTam: sanahTam - 1, bulanTam, maj, mab, bln, h_alamah, h_wasath, h_hissah, h_khasah, h_markaz, fadlMin, muwafaqah, k1, k2, k4, k5, k6, buduGhoir, h5x, tadilSyams, muqowwam, buduMuaddal, tadilAlamah, aMuaddalah, umurMenitBase, ardhTimes4Sec, umurBulan, irtifa, mukts, qaus, cahayaJari, ardhTimes4, arah, posisi, targetTahun, targetBulan, istikmal, cal, hariName: NAMA_HARI[cal.awal.dow % 7], pasaran: NAMA_PASARAN[cal.awal.pasaran], markaz, jamNasional, menitNasional };
-renderData(data);
-renderLog(data);
-renderEkstraDetail(data);
-} catch(err) { alert(err.message); console.error(err); }
+  try {
+    const targetBulan = parseInt(document.getElementById('bulanHijri').value, 10);
+    const targetTahun = parseInt(document.getElementById('tahunHijri').value, 10);
+    const markaz = document.getElementById('markaz').value.trim() || '-';
+    if(!targetBulan || !targetTahun) throw new Error('Isi parameter dengan benar.');
+    
+    const sanahTam = targetBulan === 1 ? targetTahun - 1 : targetTahun;
+    const bulanTam = targetBulan === 1 ? 12 : targetBulan - 1;
+    let maj = cariBarisMajmuah(sanahTam - 1);
+    if(!maj) throw new Error('Tahun di luar tabel majmuah yang tersedia.');
+    let rem = (sanahTam - 1) - maj.tahun;
+    
+    let zero = {tahun: 0, alamah: {m: 0, sa: 0, da: 0}, hissah: {b: 0, d: 0, m: 0}, wasath: {b: 0, d: 0, m: 0}, khasah: {b: 0, d: 0, m: 0}, markaz: {b: 0, d: 0, m: 0}};
+    let mab = rem === 0 ? zero : DATA_KITAB.tahunMabsuthah.data.find(r => r.tahun === rem);
+    if(!mab) throw new Error('Tahun mabsuthah tidak ditemukan.');
+    let bln = DATA_KITAB.bulanIjtima.data.find(r => r.index === bulanTam);
+    
+    let h_alamah = addTime(addTime(maj.alamah, mab.alamah), bln.alamah);
+    let h_hissah = addAngle(addAngle(maj.hissah, mab.hissah), bln.hissah);
+    let h_wasath = addAngle(addAngle(maj.wasath, mab.wasath), bln.wasath);
+    let h_khasah = addAngle(addAngle(maj.khasah, mab.khasah), bln.khasah);
+    let h_markaz = addAngle(addAngle(maj.markaz, mab.markaz), bln.markaz);
+    
+    let fadlMin = getFadlMinutes();
+    let muwafaqah = addTimeMinutes(h_alamah, fadlMin);
+    
+    let k1 = lookupTable('tadilKhasah', h_khasah, 1);
+    let k2 = lookupTable('tadilMarkaz', h_markaz, 1);
+    let buduGhoir = addArc(k1.mathlub, k2.mathlub);
+    let buduGhoirMin = degToMinutes(buduGhoir);
+    let h5xSec = Math.round(buduGhoirMin * 5);
+    let h5x = normDMSFromSeconds(h5xSec);
+    let tadilSyams = addArc(k2.mathlub, h5x);
+    
+    let k4 = lookupTable('hissahSaah', h_khasah, 5);
+    let k5 = lookupTable('ardQamar', h_hissah, 1);
+    let ts_sec = pairSec(tadilSyams);
+    let ws_sec = angleSec(h_wasath);
+    let ms_sec = ws_sec - ts_sec;
+    if(ms_sec < 0) ms_sec += 12 * 30 * 3600;
+    
+    let muqowwam = {b: Math.floor(ms_sec / (30 * 3600)) % 12, d: Math.floor((ms_sec % (30 * 3600)) / 3600), m: Math.floor((ms_sec % 3600) / 60)};
+    let k6 = lookupTable('tadilAyyam', muqowwam, 5);
+    let buduMuaddal = addArc(buduGhoir, k6.mathlub);
+    let tAlamahSeconds = Math.round(degToMinutes(buduMuaddal) * degToMinutes(k4.mathlub));
+    let tadilAlamah = normDMSFromSeconds(tAlamahSeconds);
+    
+    let aMin = timeTotalMinutes(muwafaqah) - Math.round(tAlamahSeconds / 60);
+    let aMuaddalah = normalizeTimeFromMinutes(aMin);
+    
+    let umurMenit = (24 * 60) - (aMuaddalah.sa * 60 + aMuaddalah.da);
+    if(umurMenit < 0) umurMenit += 24 * 60;
+    let umurMenitBase = umurMenit;
+    
+    let umurBulan = {m: 0, sa: Math.floor(umurMenit / 60), da: umurMenit % 60};
+    let irtifaSec = umurMenit * 30;
+    let irtifa = normDMSFromSeconds(irtifaSec);
+    let muktsSec = Math.floor(irtifaSec / 15);
+    let mukts = {d: 0, m: Math.floor(muktsSec / 60), s: muktsSec % 60};
+    
+    let ardhTimes4Sec = Math.round(pairSec(k5.mathlub) / 15);
+    let ardhTimes4 = {d: 0, m: Math.floor(ardhTimes4Sec / 60), s: ardhTimes4Sec % 60};
+    let qausSec = ardhTimes4Sec + muktsSec;
+    let qaus = {d: 0, m: Math.floor(qausSec / 60), s: qausSec % 60};
+    let cahayaJari = (qausSec / 240).toFixed(2);
+    
+    let b = muqowwam.b;
+    let arah = [11, 0, 1, 2, 3, 4].includes(b) ? 'Utara Matahari / شمالية' : 'Selatan Matahari / جنوبية';
+    let posisi = [11, 0, 1, 2, 3, 4].includes(b) ? 'Miring ke Selatan / جنوبية' : 'Miring ke Utara / شمالية';
+    
+    let istikmal = irtifa.d < 3;
+    let cal = getCalendarResult(targetTahun, targetBulan, istikmal, aMuaddalah.m);
+    
+    let jamNasional = (aMuaddalah.sa + 18) % 24;
+    let menitNasional = aMuaddalah.da;
+    
+    let data = { sanahTam: sanahTam - 1, bulanTam, maj, mab, bln, h_alamah, h_wasath, h_hissah, h_khasah, h_markaz, fadlMin, muwafaqah, k1, k2, k4, k5, k6, buduGhoir, h5x, tadilSyams, muqowwam, buduMuaddal, tadilAlamah, aMuaddalah, umurMenitBase, ardhTimes4Sec, umurBulan, irtifa, mukts, qaus, cahayaJari, ardhTimes4, arah, posisi, targetTahun, targetBulan, istikmal, cal, hariName: NAMA_HARI[cal.awal.dow % 7], pasaran: NAMA_PASARAN[cal.awal.pasaran], markaz, jamNasional, menitNasional };
+    renderData(data);
+    renderLog(data);
+    renderEkstraDetail(data);
+  } catch(err) { alert(err.message); console.error(err); }
 }
 
 // --- RENDERER TAMPILAN ---
 function ga(o) { return `${numCell(o.b || 0)}${numCell(o.d || 0)}${numCell(o.m || 0)}`; }
 function cell3(o) { return `<td>${h(o.d)}</td><td>${h(o.m)}</td><td>${h(o.s || 0)}</td>`; }
 function tb(b) { return `<tr><td class="label">السطر الاول</td>${cell3(b.s1)}</tr><tr><td class="label">السطر الثاني</td>${cell3(b.s2)}</tr><tr><td class="label">الفضل بينهما</td>${cell3(b.fadhl)}</tr><tr><td class="label">حاصل الضرب</td>${cell3(b.hd)}</tr><tr><td class="label">المطلوب</td>${cell3(b.mathlub)}</tr>`; }
-function simpleBox(no, title, body, footer) { return `<section class="calc-box"><h3 class="arabic" dir="rtl">(${no}) ${title}</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">′′</th></tr>${body}${footer ? `<tr><td class="label" style="font-weight:bold;">${footer.label}</td>${cell3(footer.val)}</tr>` : ''}</table></section>`; }
+function simpleBox(no, title, body, footer) { return `<section class="calc-box"><h3 class="arabic" dir="rtl">(${no}) ${title}</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">″</th></tr>${body}${footer ? `<tr><td class="label" style="font-weight:bold;">${footer.label}</td>${cell3(footer.val)}</tr>` : ''}</table></section>`; }
 
 function renderData(d) {
-const blnStr = document.getElementById('bulanHijri').options[document.getElementById('bulanHijri').selectedIndex].text;
-const topDateInfo = `${d.bln.namaIndonesia || blnStr} ${d.cal.prevYear} H`;
-const tableUtama = `<div class="top-title arabic" dir="rtl">معرفة الاجتماع لمعرفة أول الشهر ${blnStr} ${d.targetTahun} هـ على فتح الرؤف المنان</div>
-<table class="main-table arabic" dir="rtl">
-<colgroup><col style="width:20px;"><col class="labelcol"><col style="width:130px;"><col span="3"><col span="3"><col span="3"><col span="3"><col span="3"></colgroup>
-<tr><th colspan="3">المستخرجات</th><th colspan="3">العلامة</th><th colspan="3">حصة العرض</th><th colspan="3">وسط الشمس</th><th colspan="3">الخاصة</th><th colspan="3">المركز</th></tr>
-<tr><th>ر</th><th>البيان</th><th>القيمة</th><th>م</th><th>عة</th><th>قة</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th></tr>
-<tr><td>1</td><td class="rowlabel">السنة التامة</td><td>${d.sanahTam}</td>${zeroCells(15)}</tr>
-<tr><td>2</td><td class="rowlabel">السنة المجموعة</td><td>${d.maj.tahun}</td>${timeCells(d.maj.alamah)}${ga(d.maj.hissah)}${ga(d.maj.wasath)}${ga(d.maj.khasah)}${ga(d.maj.markaz)}</tr>
-<tr><td>3</td><td class="rowlabel">السنة المبسوطة</td><td>${d.mab.tahun || 0}</td>${timeCells(d.mab.alamah)}${ga(d.mab.hissah)}${ga(d.mab.wasath)}${ga(d.mab.khasah)}${ga(d.mab.markaz)}</tr>
-<tr><td>4</td><td class="rowlabel">الشهر لطلب الاجتماع</td><td>${d.bln.namaArab}</td>${timeCells(d.bln.alamah)}${ga(d.bln.hissah)}${ga(d.bln.wasath)}${ga(d.bln.khasah)}${ga(d.bln.markaz)}</tr>
-<tr><td>5</td><td class="rowlabel">الحركة المطلقات</td><td>${topDateInfo}</td>${timeCells(d.h_alamah)}${ga(d.h_hissah)}${ga(d.h_wasath)}${ga(d.h_khasah)}${ga(d.h_markaz)}</tr>
-<tr><td>6</td><td class="rowlabel">ساعة الفضل الطولين</td><td>${d.fadlMin} دقيقة</td>${numCell(0)}${numCell(0)}${numCell(Math.round(d.fadlMin))}${zeroCells(12)}</tr>
-<tr><td>7</td><td class="rowlabel">على الموافقة</td><td>${d.markaz}</td>${timeCells(d.muwafaqah)}${zeroCells(12)}</tr>
-</table>`;
-const box1 = simpleBox('١', 'الخاصة', tb(d.k1), {label: 'تعديل الخاصة', val: d.k1.mathlub});
-const box2 = simpleBox('٢', 'المركز', tb(d.k2), {label: 'تعديل المركز', val: d.k2.mathlub});
-const box3 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٣) تعديل الشمس</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">′′</th></tr><tr><td class="label">تعديل الخاصة</td>${cell3(d.k1.mathlub)}</tr><tr><td class="label">تعديل المركز (+)</td>${cell3(d.k2.mathlub)}</tr><tr><td class="label">بعد غير المعدل</td>${cell3(d.buduGhoir)}</tr><tr><td class="label">مضروب في 5</td><td class="slash"><span class="num">00</span></td><td class="slash"><span class="num">00</span></td><td>×5</td></tr><tr><td class="label">حاصل الضرب</td>${cell3(d.h5x)}</tr><tr><td class="label">تعديل المركز</td>${cell3(d.k2.mathlub)}</tr><tr><td class="label" style="font-weight:bold;">تعديل الشمس</td>${cell3(d.tadilSyams)}</tr></table></section>`;
-const box4 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٤) الخاصة</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">′′</th></tr><tr><td class="label">المدخول</td><td>${h(d.k4.madkhul.d)}</td><td>${h(d.k4.madkhul.m)}</td><td><span class="num">00</span></td></tr><tr><td class="label">الكسر المحفوظ</td><td><span class="num">00</span></td><td>${h(d.k4.kasr)}</td><td><span class="num">00</span></td></tr>${tb(d.k4)}<tr><td class="label" style="font-weight:bold;">حصة الساعة</td>${cell3(d.k4.mathlub)}</tr></table></section>`;
-const box5 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٥) الحصة</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">′′</th></tr><tr><td class="label">المدخول</td><td>${h(d.k5.madkhul.d)}</td><td>${h(d.k5.madkhul.m)}</td><td><span class="num">00</span></td></tr><tr><td class="label">الكسر المحفوظ</td><td><span class="num">00</span></td><td>${h(d.k5.kasr)}</td><td><span class="num">00</span></td></tr>${tb(d.k5)}<tr><td class="label" style="font-weight:bold;">عرض القمر</td>${cell3(d.k5.mathlub)}</tr></table></section>`;
-const box6 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٦) وسط الشمس</h3><table><tr><th class="label">البيان</th><th class="v">ج</th><th class="v">°</th><th class="v">′</th></tr><tr><td class="label">وسط الشمس</td><td>${h(d.h_wasath.b)}</td><td>${h(d.h_wasath.d)}</td><td>${h(d.h_wasath.m)}</td></tr><tr><td class="label">تعديل الشمس (-)</td><td><span class="num">00</span></td><td>${h(d.tadilSyams.d)}</td><td>${h(d.tadilSyams.m)}</td></tr><tr><td class="label" style="font-weight:bold;">مقوم الشمس</td><td>${h(d.muqowwam.b)}</td><td>${h(d.muqowwam.d)}</td><td>${h(d.muqowwam.m)}</td></tr><tr><th class="label">البيان</th><th>°</th><th>′</th><th>′′</th></tr>${tb(d.k6)}<tr><td class="label" style="font-weight:bold;">تعديل الايام</td>${cell3(d.k6.mathlub)}</tr></table></section>`;
-const box7 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٧) بعد غير المعدل</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">′′</th></tr><tr><td class="label">بعد غير المعدل</td>${cell3(d.buduGhoir)}</tr><tr><td class="label">تعديل الايام</td>${cell3(d.k6.mathlub)}</tr><tr><td class="label" style="font-weight:bold;">بعد المعدل</td>${cell3(d.buduMuaddal)}</tr><tr><td class="label" style="font-weight:bold; background:#f9f9f9;">تعديل العلامة</td>${cell3(d.tadilAlamah)}</tr></table></section>`;
-const ketContainer = `<div id="dynKeteranganContainer" class="wide-2"></div>`;
-const box8 = `<section class="calc-box tall-box"><h3 class="arabic" dir="rtl">(٨) العلامة</h3><table><tr><th class="label">البيان</th><th>م</th><th>عة</th><th>قة</th></tr><tr><td class="label">على الموافقة</td>${pairTimeCells(d.muwafaqah)}</tr><tr><td class="label">تعديل العلامة (-)</td>${pairTimeCells(arcToTimeLike(d.tadilAlamah))}</tr><tr><td class="label">العلامة المعدلة</td>${pairTimeCells(d.aMuaddalah)}</tr><tr><td class="label">ساعة القاعدة (-)</td>${numCell(0)}${numCell(24)}${numCell(0)}</tr><tr><td class="label" style="font-weight:bold;">ساعة العلامة</td>${pairTimeCells(d.aMuaddalah)}</tr><tr><td class="label">البعد من الاجتماع</td>${pairTimeCells(d.umurBulan)}</tr><tr><td class="label">ارتفاع الهلال ×30</td>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}</tr><tr><td class="label">مكث الهلال ×4</td>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}</tr><tr><td class="label">عرض القمر</td>${numCell(0)}${numCell(d.k5.mathlub.d)}${numCell(d.k5.mathlub.m)}</tr><tr><td class="label">حاصل الضرب ×4</td>${cell3(d.ardhTimes4)}</tr><tr><td class="label">مكث الهلال (+)</td>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}</tr><tr><td class="label">قوس نور الهلال</td>${numCell(0)}${numCell(d.qaus.m)}${numCell(d.qaus.s)}</tr><tr><td class="label">حصة الساعة</td>${cell3(d.k4.mathlub)}</tr></table></section>`;
-const tiny1 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">البعد ×30</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>النتيجة</th></tr><tr>${pairTimeCells(d.umurBulan)}<td>×30</td></tr><tr>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}<td>ارتفاع</td></tr></table></section>`;
-const tiny2 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">الارتفاع ×4</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>النتيجة</th></tr><tr>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}<td>×4</td></tr><tr>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}<td>مكث</td></tr></table></section>`;
-const tiny3 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">نور الهلال</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>البيان</th></tr><tr>${numCell(0)}${numCell(d.k5.mathlub.d)}${numCell(d.k5.mathlub.m)}<td>عرض</td></tr><tr>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}<td>مكث</td></tr><tr>${numCell(0)}${numCell(d.qaus.m)}${numCell(d.qaus.s)}<td>قوس</td></tr></table></section>`;
-document.getElementById('resultContent').innerHTML = `${tableUtama}<div class="boxes-grid">${box1}${box2}${box3}${box4}${box5}${box6}${box7}${ketContainer}</div><div class="bottom-grid">${box8}${tiny1}${tiny2}${tiny3}</div>`;
-window.currentFalakData = d;
-renderDynamicKeterangan(0);
+  const blnStr = document.getElementById('bulanHijri').options[document.getElementById('bulanHijri').selectedIndex].text;
+  const topDateInfo = `${d.bln.namaIndonesia || blnStr} ${d.cal.prevYear} H`;
+  
+  const tableUtama = `<div class="top-title arabic" dir="rtl">معرفة الاجتماع لمعرفة أول الشهر ${blnStr} ${d.targetTahun} هـ على فتح الرؤف المنان</div>
+  <table class="main-table arabic" dir="rtl">
+    <colgroup><col style="width:20px;"><col class="labelcol"><col style="width:130px;"><col span="3"><col span="3"><col span="3"><col span="3"><col span="3"></colgroup>
+    <tr><th colspan="3">المستخرجات</th><th colspan="3">العلامة</th><th colspan="3">حصة العرض</th><th colspan="3">وسط الشمس</th><th colspan="3">الخاصة</th><th colspan="3">المركز</th></tr>
+    <tr><th>ر</th><th>البيان</th><th>القيمة</th><th>م</th><th>عة</th><th>قة</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th><th>ج</th><th>°</th><th>′</th></tr>
+    <tr><td>1</td><td class="rowlabel">السنة التامة</td><td>${d.sanahTam}</td>${zeroCells(15)}</tr>
+    <tr><td>2</td><td class="rowlabel">السنة المجموعة</td><td>${d.maj.tahun}</td>${timeCells(d.maj.alamah)}${ga(d.maj.hissah)}${ga(d.maj.wasath)}${ga(d.maj.khasah)}${ga(d.maj.markaz)}</tr>
+    <tr><td>3</td><td class="rowlabel">السنة المبسوطة</td><td>${d.mab.tahun || 0}</td>${timeCells(d.mab.alamah)}${ga(d.mab.hissah)}${ga(d.mab.wasath)}${ga(d.mab.khasah)}${ga(d.mab.markaz)}</tr>
+    <tr><td>4</td><td class="rowlabel">الشهر لطلب الاجتماع</td><td>${d.bln.namaArab}</td>${timeCells(d.bln.alamah)}${ga(d.bln.hissah)}${ga(d.bln.wasath)}${ga(d.bln.khasah)}${ga(d.bln.markaz)}</tr>
+    <tr><td>5</td><td class="rowlabel">الحركة المطلقات</td><td>${topDateInfo}</td>${timeCells(d.h_alamah)}${ga(d.h_hissah)}${ga(d.h_wasath)}${ga(d.h_khasah)}${ga(d.h_markaz)}</tr>
+    <tr><td>6</td><td class="rowlabel">ساعة الفضل الطولين</td><td>${d.fadlMin} دقيقة</td>${numCell(0)}${numCell(0)}${numCell(Math.round(d.fadlMin))}${zeroCells(12)}</tr>
+    <tr><td>7</td><td class="rowlabel">على الموافقة</td><td>${d.markaz}</td>${timeCells(d.muwafaqah)}${zeroCells(12)}</tr>
+  </table>`;
+  
+  const box1 = simpleBox('١', 'الخاصة', tb(d.k1), {label: 'تعديل الخاصة', val: d.k1.mathlub});
+  const box2 = simpleBox('٢', 'المركز', tb(d.k2), {label: 'تعديل المركز', val: d.k2.mathlub});
+  const box3 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٣) تعديل الشمس</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">″</th></tr><tr><td class="label">تعديل الخاصة</td>${cell3(d.k1.mathlub)}</tr><tr><td class="label">تعديل المركز (+)</td>${cell3(d.k2.mathlub)}</tr><tr><td class="label">بعد غير المعدل</td>${cell3(d.buduGhoir)}</tr><tr><td class="label">مضروب في 5</td><td class="slash"><span class="num">00</span></td><td class="slash"><span class="num">00</span></td><td>×5</td></tr><tr><td class="label">حاصل الضرب</td>${cell3(d.h5x)}</tr><tr><td class="label">تعديل المركز</td>${cell3(d.k2.mathlub)}</tr><tr><td class="label" style="font-weight:bold;">تعديل الشمس</td>${cell3(d.tadilSyams)}</tr></table></section>`;
+  const box4 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٤) الخاصة</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">″</th></tr><tr><td class="label">المدخول</td><td>${h(d.k4.madkhul.d)}</td><td>${h(d.k4.madkhul.m)}</td><td><span class="num">00</span></td></tr><tr><td class="label">الكسر المحفوظ</td><td><span class="num">00</span></td><td>${h(d.k4.kasr)}</td><td><span class="num">00</span></td></tr>${tb(d.k4)}<tr><td class="label" style="font-weight:bold;">حصة الساعة</td>${cell3(d.k4.mathlub)}</tr></table></section>`;
+  const box5 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٥) الحصة</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">″</th></tr><tr><td class="label">المدخول</td><td>${h(d.k5.madkhul.d)}</td><td>${h(d.k5.madkhul.m)}</td><td><span class="num">00</span></td></tr><tr><td class="label">الكسر المحفوظ</td><td><span class="num">00</span></td><td>${h(d.k5.kasr)}</td><td><span class="num">00</span></td></tr>${tb(d.k5)}<tr><td class="label" style="font-weight:bold;">عرض القمر</td>${cell3(d.k5.mathlub)}</tr></table></section>`;
+  const box6 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٦) وسط الشمس</h3><table><tr><th class="label">البيان</th><th class="v">ج</th><th class="v">°</th><th class="v">′</th></tr><tr><td class="label">وسط الشمس</td><td>${h(d.h_wasath.b)}</td><td>${h(d.h_wasath.d)}</td><td>${h(d.h_wasath.m)}</td></tr><tr><td class="label">تعديل الشمس (-)</td><td><span class="num">00</span></td><td>${h(d.tadilSyams.d)}</td><td>${h(d.tadilSyams.m)}</td></tr><tr><td class="label" style="font-weight:bold;">مقوم الشمس</td><td>${h(d.muqowwam.b)}</td><td>${h(d.muqowwam.d)}</td><td>${h(d.muqowwam.m)}</td></tr><tr><th class="label">البيان</th><th>°</th><th>′</th><th>″</th></tr>${tb(d.k6)}<tr><td class="label" style="font-weight:bold;">تعديل الايام</td>${cell3(d.k6.mathlub)}</tr></table></section>`;
+  const box7 = `<section class="calc-box"><h3 class="arabic" dir="rtl">(٧) بعد غير المعدل</h3><table><tr><th class="label">البيان</th><th class="v">°</th><th class="v">′</th><th class="v">″</th></tr><tr><td class="label">بعد غير المعدل</td>${cell3(d.buduGhoir)}</tr><tr><td class="label">تعديل الايام</td>${cell3(d.k6.mathlub)}</tr><tr><td class="label" style="font-weight:bold;">بعد المعدل</td>${cell3(d.buduMuaddal)}</tr><tr><td class="label" style="font-weight:bold; background:#f9f9f9;">تعديل العلامة</td>${cell3(d.tadilAlamah)}</tr></table></section>`;
+  const ketContainer = `<div id="dynKeteranganContainer" class="wide-2"></div>`;
+  const box8 = `<section class="calc-box tall-box"><h3 class="arabic" dir="rtl">(٨) العلامة</h3><table><tr><th class="label">البيان</th><th>م</th><th>عة</th><th>قة</th></tr><tr><td class="label">على الموافقة</td>${pairTimeCells(d.muwafaqah)}</tr><tr><td class="label">تعديل العلامة (-)</td>${pairTimeCells(arcToTimeLike(d.tadilAlamah))}</tr><tr><td class="label">العلامة المعدلة</td>${pairTimeCells(d.aMuaddalah)}</tr><tr><td class="label">ساعة القاعدة (-)</td>${numCell(0)}${numCell(24)}${numCell(0)}</tr><tr><td class="label" style="font-weight:bold;">ساعة العلامة</td>${pairTimeCells(d.aMuaddalah)}</tr><tr><td class="label">البعد من الاجتماع</td>${pairTimeCells(d.umurBulan)}</tr><tr><td class="label">ارتفاع الهلال ×30</td>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}</tr><tr><td class="label">مكث الهلال ×4</td>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}</tr><tr><td class="label">عرض القمر</td>${numCell(0)}${numCell(d.k5.mathlub.d)}${numCell(d.k5.mathlub.m)}</tr><tr><td class="label">حاصل الضرب ×4</td>${cell3(d.ardhTimes4)}</tr><tr><td class="label">مكث الهلال (+)</td>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}</tr><tr><td class="label">قوس نور الهلال</td>${numCell(0)}${numCell(d.qaus.m)}${numCell(d.qaus.s)}</tr><tr><td class="label">حصة الساعة</td>${cell3(d.k4.mathlub)}</tr></table></section>`;
+  
+  const tiny1 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">البعد ×30</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>النتيجة</th></tr><tr>${pairTimeCells(d.umurBulan)}<td>×30</td></tr><tr>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}<td>ارتفاع</td></tr></table></section>`;
+  const tiny2 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">الارتفاع ×4</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>النتيجة</th></tr><tr>${numCell(0)}${numCell(d.irtifa.d)}${numCell(d.irtifa.m)}<td>×4</td></tr><tr>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}<td>مكث</td></tr></table></section>`;
+  const tiny3 = `<section class="tiny-mult"><h3 class="arabic" dir="rtl">نور الهلال</h3><table><tr><th>م</th><th>عة</th><th>قة</th><th>البيان</th></tr><tr>${numCell(0)}${numCell(d.k5.mathlub.d)}${numCell(d.k5.mathlub.m)}<td>عرض</td></tr><tr>${numCell(0)}${numCell(d.mukts.m)}${numCell(d.mukts.s)}<td>مكث</td></tr><tr>${numCell(0)}${numCell(d.qaus.m)}${numCell(d.qaus.s)}<td>قوس</td></tr></table></section>`;
+  
+  document.getElementById('resultContent').innerHTML = `${tableUtama}<div class="boxes-grid">${box1}${box2}${box3}${box4}${box5}${box6}${box7}${ketContainer}</div><div class="bottom-grid">${box8}${tiny1}${tiny2}${tiny3}</div>`;
+  window.currentFalakData = d;
+  renderDynamicKeterangan(0);
 }
 
 function renderDynamicKeterangan(offset) {
-const d = window.currentFalakData; if (!d) return;
-const blnStr = document.getElementById('bulanHijri').options[document.getElementById('bulanHijri').selectedIndex].text;
-const prevMonthObj = DATA_KITAB.bulanIjtima.data.find(r => r.index === d.cal.prevMonth);
-const tIjtima = d.cal.ijtima;
-let tzOpt = document.getElementById('zona');
-let tzText = tzOpt.options[tzOpt.selectedIndex].text.split(' ')[0] || "Lokal";
-if (tzOpt.value === 'manual') tzText = "Waktu Lokal";
-let dynUmurMenit = d.umurMenitBase + (offset * 1440);
-let dynUmurBulan = {m: 0, sa: Math.floor(dynUmurMenit / 60), da: dynUmurMenit % 60};
-let dynIrtifaSec = dynUmurMenit * 30;
-let dynIrtifa = normDMSFromSeconds(dynIrtifaSec);
-let dynMuktsSec = Math.floor(dynIrtifaSec / 15);
-let dynMukts = {d: 0, m: Math.floor(dynMuktsSec / 60), s: dynMuktsSec % 60};
-let dynQausSec = d.ardhTimes4Sec + dynMuktsSec;
-let dynQaus = {d: 0, m: Math.floor(dynQausSec / 60), s: dynQausSec % 60};
-let dynCahayaJari = (dynQausSec / 240).toFixed(2);
-let targetJD = d.cal.awal.jd - (d.istikmal ? 2 : 1) + parseInt(offset);
-let targetDate = dateFromJD(targetJD);
-let statusHariStr = "";
-if(offset == 0) statusHariStr = "Hari ke-29 (Pelaksanaan Ru'yah)";
-else if(offset == 1 && d.istikmal) statusHariStr = "Hari ke-30 (Bulan Istikmal/Digenapkan)";
-else statusHariStr = "Hari ke-1 (Awal Bulan Baru)";
-const kesimpulan = `Ijtima' akhir bulan ${prevMonthObj.namaIndonesia} ${d.cal.prevYear} H terjadi pada <b>${NAMA_HARI[tIjtima.dow % 7]} ${NAMA_PASARAN[tIjtima.pasaran]}</b>, <b>${fmtDate(tIjtima)}</b>, pukul <b>${fmtHMS({sa: d.jamNasional, da: d.menitNasional})} ${tzText}</b>.
-Pada saat maghrib di <b>${statusHariStr} (${fmtDate(targetDate)})</b>, posisi hilal mencapai <b>${dynIrtifa.d}° ${zpad(dynIrtifa.m)}'</b> (lama: <b>${zpad(dynMukts.m)}' ${zpad(dynMukts.s)}"</b>) condong ke <b>${d.arah}</b>.`;
+  const d = window.currentFalakData; if (!d) return;
+  const prevMonthObj = DATA_KITAB.bulanIjtima.data.find(r => r.index === d.cal.prevMonth);
+  const tIjtima = d.cal.ijtima;
+  let tzOpt = document.getElementById('zona');
+  let tzText = tzOpt.options[tzOpt.selectedIndex].text.split(' ')[0] || "Lokal";
+  if (tzOpt.value === 'manual') tzText = "Waktu Lokal";
+  
+  let dynUmurMenit = d.umurMenitBase + (offset * 1440);
+  let dynUmurBulan = {m: 0, sa: Math.floor(dynUmurMenit / 60), da: dynUmurMenit % 60};
+  let dynIrtifaSec = dynUmurMenit * 30;
+  let dynIrtifa = normDMSFromSeconds(dynIrtifaSec);
+  let dynMuktsSec = Math.floor(dynIrtifaSec / 15);
+  let dynMukts = {d: 0, m: Math.floor(dynMuktsSec / 60), s: dynMuktsSec % 60};
+  let dynQausSec = d.ardhTimes4Sec + dynMuktsSec;
+  let dynQaus = {d: 0, m: Math.floor(dynQausSec / 60), s: dynQausSec % 60};
+  let dynCahayaJari = (dynQausSec / 240).toFixed(2);
+  
+  let targetJD = d.cal.awal.jd - (d.istikmal ? 2 : 1) + parseInt(offset);
+  let targetDate = dateFromJD(targetJD);
+  
+  let statusHariStr = "";
+  if(offset == 0) statusHariStr = "Hari ke-29 (Pelaksanaan Ru'yah)";
+  else if(offset == 1 && d.istikmal) statusHariStr = "Hari ke-30 (Bulan Istikmal/Digenapkan)";
+  else statusHariStr = "Hari ke-1 (Awal Bulan Baru)";
+  
+  const kesimpulan = `Ijtima' akhir bulan ${prevMonthObj.namaIndonesia} ${d.cal.prevYear} H terjadi pada <b>${NAMA_HARI[tIjtima.dow % 7]} ${NAMA_PASARAN[tIjtima.pasaran]}</b>, <b>${fmtDate(tIjtima)}</b>, pukul <b>${fmtHMS({sa: d.jamNasional, da: d.menitNasional})} ${tzText}</b>.
+  Pada saat maghrib di <b>${statusHariStr} (${fmtDate(targetDate)})</b>, posisi hilal mencapai <b>${dynIrtifa.d}° ${zpad(dynIrtifa.m)}'</b> (lama: <b>${zpad(dynMukts.m)}' ${zpad(dynMukts.s)}"</b>) condong ke <b>${d.arah}</b>.`;
 
-const filterOptions = `
-<div class="filter-box">
-<span>Proyeksi Tanggal:</span>
-<select id="filterSelectHari" onchange="renderDynamicKeterangan(this.value)">
-<option value="0" ${offset == 0 ? 'selected' : ''}>Hari Ke-29 (Ru'yah)</option>
-${d.istikmal ? `<option value="1" ${offset == 1 ? 'selected' : ''}>Hari Ke-30 (Istikmal)</option>` : ''}
-<option value="${d.istikmal ? 2 : 1}" ${offset == (d.istikmal ? 2 : 1) ? 'selected' : ''}>Hari Ke-1 (Bulan Baru)</option>
-</select>
-</div>
-`;
-document.getElementById('dynKeteranganContainer').innerHTML = `<section class="keterangan"><h3>Data &amp; Filter</h3>${filterOptions}<div class="ket-line"><b>Arah Hilal</b><span>: ${d.arah}</span><b>Tinggi Hilal</b><span>: ${zpad(dynIrtifa.d)}° ${zpad(dynIrtifa.m)}'</span><b>Lama Di Ufuk</b><span>: ${zpad(dynMukts.m)}' ${zpad(dynMukts.s)}"</span></div><div class="conclusion-box">${kesimpulan}</div></section>`;
+  // --- VISUALISASI SVG ---
+  const heightDecimal = dynIrtifa.d + (dynIrtifa.m / 60);
+  const ufukY = 160; 
+  const scale = 15; // 15 pixel per derajat
+  const thresholdY = ufukY - (3 * scale);
+  const moonY = Math.max(15, Math.min(ufukY - (heightDecimal * scale), 185));
+  const isMoonVisible = heightDecimal >= 3;
+  const moonColor = isMoonVisible ? "#f4c430" : "#888";
+  
+  const svgVisual = `
+  <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px; text-align: center; font-family: sans-serif;">
+    <h4 style="margin: 0 0 10px; font-size: 14px; font-weight: 700;">Visualisasi Posisi Hilal Saat Maghrib</h4>
+    <svg width="100%" height="200" style="background: #1a233a; border-radius: 8px; max-width: 100%; transition: all 0.3s ease;">
+      <rect x="0" y="${ufukY}" width="100%" height="40" fill="#2c3e50" />
+      <line x1="0" y1="${ufukY}" x2="100%" y2="${ufukY}" stroke="#27ae60" stroke-width="2" />
+      <text x="10" y="${ufukY + 18}" fill="#ecf0f1" font-size="12">Ufuk (0°)</text>
+      <line x1="0" y1="${thresholdY}" x2="100%" y2="${thresholdY}" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,5" />
+      <text x="10" y="${thresholdY - 6}" fill="#e74c3c" font-size="12">Batas Imkan Rukyat (3°)</text>
+      <circle cx="50%" cy="${ufukY + 20}" r="15" fill="#f39c12" />
+      <text x="50%" y="${ufukY + 36}" fill="#ecf0f1" font-size="9" text-anchor="middle">Matahari</text>
+      <circle cx="50%" cy="${moonY}" r="10" fill="${moonColor}" style="transition: cy 0.5s ease-in-out, fill 0.5s;"/>
+      <circle cx="51%" cy="${moonY - 2}" r="9" fill="#1a233a" style="transition: cy 0.5s ease-in-out;"/> 
+      <text x="50%" y="${moonY - 16}" fill="#fff" font-size="12" text-anchor="middle" font-weight="bold" style="transition: y 0.5s ease-in-out;">Hilal: ${dynIrtifa.d}° ${dynIrtifa.m}'</text>
+      <line x1="50%" y1="${ufukY}" x2="50%" y2="${moonY + 12}" stroke="#3498db" stroke-width="1" stroke-dasharray="2,2" />
+    </svg>
+    <div style="font-size: 10.5px; margin-top: 6px; color: #555; text-align: left; line-height: 1.3;">
+      *Grafik bersifat ilustrasi. Ketinggian hilal aktual pada hari terpilih adalah <b>${heightDecimal.toFixed(2)}°</b>.
+    </div>
+  </div>`;
+
+  const filterOptions = `
+  <div class="filter-box">
+    <span>Proyeksi Tanggal:</span>
+    <select id="filterSelectHari" onchange="renderDynamicKeterangan(this.value)">
+      <option value="0" ${offset == 0 ? 'selected' : ''}>Hari Ke-29 (Ru'yah)</option>
+      ${d.istikmal ? `<option value="1" ${offset == 1 ? 'selected' : ''}>Hari Ke-30 (Istikmal)</option>` : ''}
+      <option value="${d.istikmal ? 2 : 1}" ${offset == (d.istikmal ? 2 : 1) ? 'selected' : ''}>Hari Ke-1 (Bulan Baru)</option>
+    </select>
+  </div>`;
+  
+  document.getElementById('dynKeteranganContainer').innerHTML = `<section class="keterangan"><h3>Data &amp; Keterangan Dinamis</h3>${filterOptions}<div class="ket-line"><b>Arah Hilal</b><span>: ${d.arah}</span><b>Posisi Hilal</b><span>: ${d.posisi}</span><b>Tinggi Hilal</b><span>: ${zpad(dynIrtifa.d)}° ${zpad(dynIrtifa.m)}'</span><b>Lama Di Ufuk</b><span>: ${zpad(dynMukts.m)}' ${zpad(dynMukts.s)}"</span><b>Besar Cahaya</b><span>: ${dynCahayaJari} Jari</span><b>Qaus Nur Hilal</b><span>: ${zpad(dynQaus.m)}' ${zpad(dynQaus.s)}"</span></div><div class="conclusion-box">${kesimpulan}</div>${svgVisual}</section>`;
 }
 
 function renderLog(d) {
-const rows = [['Sanah Tam', d.sanahTam], ['Bulan Tam', d.bulanTam], ['Alamah Mu\u2019addalah', `${zpad(d.aMuaddalah.m)} | ${zpad(d.aMuaddalah.sa)}:${zpad(d.aMuaddalah.da)}`], ['Umur Bulan', `${zpad(d.umurBulan.sa)} jam ${zpad(d.umurBulan.da)} menit`]];
-document.getElementById('detailsWrap').innerHTML = `<h3>Log Trace Ringkas</h3><table>${rows.map((r,i) => `<tr><td>${i+1}</td><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}</table>`;
+  const rows = [['Sanah Tam', d.sanahTam], ['Bulan Tam', d.bulanTam], ['Alamah Mu\u2019addalah', `${zpad(d.aMuaddalah.m)} | ${zpad(d.aMuaddalah.sa)}:${zpad(d.aMuaddalah.da)}`], ['Umur Bulan', `${zpad(d.umurBulan.sa)} jam ${zpad(d.umurBulan.da)} menit`]];
+  document.getElementById('detailsWrap').innerHTML = `<h3>Log Trace Ringkas</h3><table>${rows.map((r,i) => `<tr><td>${i+1}</td><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}</table>`;
 }
+
 function renderEkstraDetail(d) {
-document.getElementById('ekstraDetailMath').innerHTML = `<h3>🔍 Bedah Analisis Matematis Lengkap</h3><p>Fadl ath-Thulain: ${d.fadlMin} menit. Ijtima': Pukul ${zpad(d.jamNasional)}:${zpad(d.menitNasional)}.</p>`;
+  document.getElementById('ekstraDetailMath').innerHTML = `<h3>🔍 Bedah Analisis Matematis Lengkap</h3><p>Fadl ath-Thulain: ${d.fadlMin} menit. Ijtima': Pukul ${zpad(d.jamNasional)}:${zpad(d.menitNasional)}.</p>`;
 }
 
 // ==========================================================================
 // --- EDITOR DATA TABEL KITAB (Mendukung Insert & Delete layaknya Excel) ---
 // ==========================================================================
 const EDITOR_TABS = [
-{key:'tahunMajmuah', label:'Tahun Majmu\'ah', kind:'list', keyField:'tahun', keyLabel:'Tahun'},
-{key:'tahunMabsuthah', label:'Tahun Mabsuthah', kind:'list', keyField:'tahun', keyLabel:'Tahun'},
-{key:'bulanIjtima', label:'Bulan Ijtima\'', kind:'list', keyField:'index', keyLabel:'Index Bulan'},
-{key:'tadilKhasah', label:"Ta'dil Khasah (Buruj 0-11)", kind:'table'},
-{key:'tadilMarkaz', label:"Ta'dil Markaz (Buruj 0-11)", kind:'table'},
-{key:'tadilAyyam', label:"Ta'dil Ayyam (Buruj 0-11)", kind:'table'},
-{key:'hissahSaah', label:"Hissah Sa'ah (Buruj 0-11)", kind:'table'},
-{key:'ardQamar', label:"Ardh Qomar (Buruj 0-5)", kind:'table'}
+  {key:'tahunMajmuah', label:'Tahun Majmu\'ah', kind:'list', keyField:'tahun', keyLabel:'Tahun'},
+  {key:'tahunMabsuthah', label:'Tahun Mabsuthah', kind:'list', keyField:'tahun', keyLabel:'Tahun'},
+  {key:'bulanIjtima', label:'Bulan Ijtima\'', kind:'list', keyField:'index', keyLabel:'Index Bulan'},
+  {key:'tadilKhasah', label:"Ta'dil Khasah (Buruj 0-11)", kind:'table'},
+  {key:'tadilMarkaz', label:"Ta'dil Markaz (Buruj 0-11)", kind:'table'},
+  {key:'tadilAyyam', label:"Ta'dil Ayyam (Buruj 0-11)", kind:'table'},
+  {key:'hissahSaah', label:"Hissah Sa'ah (Buruj 0-11)", kind:'table'},
+  {key:'ardQamar', label:"Ardh Qomar (Buruj 0-5)", kind:'table'}
 ];
+
 let editorActiveTab = 'tahunMajmuah';
 window.editorWorkingData = {};
 
@@ -728,202 +897,196 @@ function getPath(obj, path){ return path.split('.').reduce((o,k)=>(o&&o[k]!==und
 function setPath(obj, path, val){ const parts = path.split('.'); let cur = obj; for(let i=0;i<parts.length-1;i++){ if(!cur[parts[i]]) cur[parts[i]] = {}; cur = cur[parts[i]]; } cur[parts[parts.length-1]] = val; }
 
 function initAllEditorWorkingData() {
-EDITOR_TABS.forEach(tabDef => {
-if(editorWorkingData[tabDef.key]) return;
-if(tabDef.kind === 'list') {
-editorWorkingData[tabDef.key] = JSON.parse(JSON.stringify(DATA_KITAB[tabDef.key].data));
-} else {
-const table = DATA_KITAB[tabDef.key];
-const obj = {};
-for(const deg in table.data) obj[deg] = table.data[deg].map(p => ({...p}));
-editorWorkingData[tabDef.key] = obj;
-}
-});
+  EDITOR_TABS.forEach(tabDef => {
+    if(editorWorkingData[tabDef.key]) return;
+    if(tabDef.kind === 'list') {
+      editorWorkingData[tabDef.key] = JSON.parse(JSON.stringify(DATA_KITAB[tabDef.key].data));
+    } else {
+      const table = DATA_KITAB[tabDef.key];
+      const obj = {};
+      for(const deg in table.data) obj[deg] = table.data[deg].map(p => ({...p}));
+      editorWorkingData[tabDef.key] = obj;
+    }
+  });
 }
 
 function renderEditorTabs() {
-const wrap = document.getElementById('editorTabs');
-wrap.innerHTML = EDITOR_TABS.map(t => `<button data-key="${t.key}" class="${t.key===editorActiveTab?'active':''}" onclick="switchEditorTab('${t.key}')">${t.label}</button>`).join('');
+  const wrap = document.getElementById('editorTabs');
+  wrap.innerHTML = EDITOR_TABS.map(t => `<button data-key="${t.key}" class="${t.key===editorActiveTab?'active':''}" onclick="switchEditorTab('${t.key}')">${t.label}</button>`).join('');
 }
 window.switchEditorTab = function(key) { editorActiveTab = key; renderEditorTabs(); renderEditorGrid(); };
 
 const GROUP_LABELS_LIST = [
-{key:'alamah', label:'Alamah', subs:[['m','م'],['sa','عة'],['da','قة']]},
-{key:'hissah', label:'Hissah', subs:[['b','ج'],['d','°'],['m',"′"]]},
-{key:'wasath', label:'Wasath', subs:[['b','ج'],['d','°'],['m',"′"]]},
-{key:'khasah', label:'Khasah', subs:[['b','ج'],['d','°'],['m',"′"]]},
-{key:'markaz', label:'Markaz', subs:[['b','ج'],['d','°'],['m',"′"]]}
+  {key:'alamah', label:'Alamah', subs:[['m','م'],['sa','عة'],['da','قة']]},
+  {key:'hissah', label:'Hissah', subs:[['b','ج'],['d','°'],['m',"′"]]},
+  {key:'wasath', label:'Wasath', subs:[['b','ج'],['d','°'],['m',"′"]]},
+  {key:'khasah', label:'Khasah', subs:[['b','ج'],['d','°'],['m',"′"]]},
+  {key:'markaz', label:'Markaz', subs:[['b','ج'],['d','°'],['m',"′"]]}
 ];
 
 function renderEditorEdgeActions(tabDef) {
-const wrap = document.getElementById('editorEdgeActions');
-wrap.innerHTML = `
-<button type="button" onclick="addRowEdge('${tabDef.key}','top')">➕ Tambah Baris di Paling Atas</button>
-<button type="button" class="below" onclick="addRowEdge('${tabDef.key}','bottom')">➕ Tambah Baris di Paling Bawah</button>
-`;
+  const wrap = document.getElementById('editorEdgeActions');
+  wrap.innerHTML = `
+    <button type="button" onclick="addRowEdge('${tabDef.key}','top')">➕ Tambah Baris di Paling Atas</button>
+    <button type="button" class="below" onclick="addRowEdge('${tabDef.key}','bottom')">➕ Tambah Baris di Paling Bawah</button>
+  `;
 }
 
 function renderEditorGrid() {
-const tabDef = EDITOR_TABS.find(t => t.key === editorActiveTab);
-const grid = document.getElementById('editorGrid');
-if(!tabDef) { grid.innerHTML = ''; return; }
-initAllEditorWorkingData();
-renderEditorEdgeActions(tabDef);
-let html = '';
+  const tabDef = EDITOR_TABS.find(t => t.key === editorActiveTab);
+  const grid = document.getElementById('editorGrid');
+  if(!tabDef) { grid.innerHTML = ''; return; }
+  initAllEditorWorkingData();
+  renderEditorEdgeActions(tabDef);
+  let html = '';
 
-if(tabDef.kind === 'list') {
-// --- LIST/ARRAY RENDER ---
-const data = editorWorkingData[tabDef.key];
-html += `<div class="editor-table-wrap"><table class="editor-table"><thead>
-<tr><th rowspan="2">${tabDef.keyLabel}</th>${GROUP_LABELS_LIST.map(g => `<th colspan="${g.subs.length}">${g.label}</th>`).join('')}<th rowspan="2">Aksi Row</th></tr>
-<tr class="sub-head">${GROUP_LABELS_LIST.map(g => g.subs.map(s => `<th>${s[1]}</th>`).join('')).join('')}</tr>
-</thead><tbody>`;
-data.forEach((row, idx) => {
-const keyVal = getPath(row, tabDef.keyField);
-html += `<tr><td class="rowkey"><input type="number" step="1" value="${keyVal}" oninput="updateListKey('${tabDef.key}',${idx},'${tabDef.keyField}',this.value)"></td>`;
-GROUP_LABELS_LIST.forEach(g => {
-g.subs.forEach(s => {
-const f = `${g.key}.${s[0]}`;
-const val = getPath(row, f);
-html += `<td><input type="number" step="1" value="${val}" oninput="updateListField('${tabDef.key}',${idx},'${f}',this.value)"></td>`;
-});
-});
-// Baris Aksi Ala Spreadsheet (Atas, Bawah, Hapus)
-html += `<td><div class="editor-row-actions">
-<button type="button" class="mini-btn" title="Sisipkan baris di atas ini" onclick="addListRow('${tabDef.key}',${idx},'above')">➕▲</button>
-<button type="button" class="mini-btn below" title="Sisipkan baris di bawah ini" onclick="addListRow('${tabDef.key}',${idx},'below')">➕▼</button>
-<button type="button" class="mini-btn danger" title="Hapus baris ini" onclick="deleteListRow('${tabDef.key}',${idx})">❌</button>
-</div></td></tr>`;
-});
-html += `</tbody></table></div>`;
-} else {
-// --- DERAJAT OBJECT RENDER ---
-const dataObj = editorWorkingData[tabDef.key];
-const degs = Object.keys(dataObj).sort((a,b) => Number(a)-Number(b));
-const burujCount = dataObj[degs[0]] ? dataObj[degs[0]].length : 12;
-html += `<div class="editor-table-wrap"><table class="editor-table buruj-table"><thead>
-<tr><th rowspan="2">Derajat</th>${Array.from({length:burujCount}, (_,i) => `<th colspan="2">Buruj ${i}</th>`).join('')}<th rowspan="2">Aksi Row</th></tr>
-<tr class="sub-head">${Array.from({length:burujCount}, () => `<th>°</th><th>′</th>`).join('')}</tr>
-</thead><tbody>`;
-degs.forEach(deg => {
-const row = dataObj[deg];
-html += `<tr><td class="rowkey"><input type="number" step="1" value="${deg}" onchange="updateTableDeg('${tabDef.key}','${deg}',this.value)"></td>`;
-for(let bIdx=0; bIdx<burujCount; bIdx++) {
-const pair = row[bIdx] || {d:0,m:0,s:0};
-html += `<td><input type="number" step="1" value="${pair.d}" oninput="updateTableField('${tabDef.key}','${deg}',${bIdx},'d',this.value)"></td>`;
-html += `<td><input type="number" step="1" value="${pair.m}" oninput="updateTableField('${tabDef.key}','${deg}',${bIdx},'m',this.value)"></td>`;
-}
-// Baris Aksi Ala Spreadsheet (Atas, Bawah, Hapus)
-html += `<td><div class="editor-row-actions">
-<button type="button" class="mini-btn" title="Sisipkan baris derajat sebelum ini" onclick="addTableRow('${tabDef.key}','${deg}','above')">➕▲</button>
-<button type="button" class="mini-btn below" title="Sisipkan baris derajat setelah ini" onclick="addTableRow('${tabDef.key}','${deg}','below')">➕▼</button>
-<button type="button" class="mini-btn danger" title="Hapus derajat ini" onclick="deleteTableRow('${tabDef.key}','${deg}')">❌</button>
-</div></td></tr>`;
-});
-html += `</tbody></table></div>`;
-}
-grid.innerHTML = html;
+  if(tabDef.kind === 'list') {
+    const data = editorWorkingData[tabDef.key];
+    html += `<div class="editor-table-wrap"><table class="editor-table"><thead>
+    <tr><th rowspan="2">${tabDef.keyLabel}</th>${GROUP_LABELS_LIST.map(g => `<th colspan="${g.subs.length}">${g.label}</th>`).join('')}<th rowspan="2">Aksi Row</th></tr>
+    <tr class="sub-head">${GROUP_LABELS_LIST.map(g => g.subs.map(s => `<th>${s[1]}</th>`).join('')).join('')}</tr>
+    </thead><tbody>`;
+    data.forEach((row, idx) => {
+      const keyVal = getPath(row, tabDef.keyField);
+      html += `<tr><td class="rowkey"><input type="number" step="1" value="${keyVal}" oninput="updateListKey('${tabDef.key}',${idx},'${tabDef.keyField}',this.value)"></td>`;
+      GROUP_LABELS_LIST.forEach(g => {
+        g.subs.forEach(s => {
+          const f = `${g.key}.${s[0]}`;
+          const val = getPath(row, f);
+          html += `<td><input type="number" step="1" value="${val}" oninput="updateListField('${tabDef.key}',${idx},'${f}',this.value)"></td>`;
+        });
+      });
+      html += `<td><div class="editor-row-actions">
+        <button type="button" class="mini-btn" title="Sisipkan baris di atas ini" onclick="addListRow('${tabDef.key}',${idx},'above')">➕▲</button>
+        <button type="button" class="mini-btn below" title="Sisipkan baris di bawah ini" onclick="addListRow('${tabDef.key}',${idx},'below')">➕▼</button>
+        <button type="button" class="mini-btn danger" title="Hapus baris ini" onclick="deleteListRow('${tabDef.key}',${idx})">❌</button>
+      </div></td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    const dataObj = editorWorkingData[tabDef.key];
+    const degs = Object.keys(dataObj).sort((a,b) => Number(a)-Number(b));
+    const burujCount = dataObj[degs[0]] ? dataObj[degs[0]].length : 12;
+    html += `<div class="editor-table-wrap"><table class="editor-table buruj-table"><thead>
+    <tr><th rowspan="2">Derajat</th>${Array.from({length:burujCount}, (_,i) => `<th colspan="2">Buruj ${i}</th>`).join('')}<th rowspan="2">Aksi Row</th></tr>
+    <tr class="sub-head">${Array.from({length:burujCount}, () => `<th>°</th><th>′</th>`).join('')}</tr>
+    </thead><tbody>`;
+    degs.forEach(deg => {
+      const row = dataObj[deg];
+      html += `<tr><td class="rowkey"><input type="number" step="1" value="${deg}" onchange="updateTableDeg('${tabDef.key}','${deg}',this.value)"></td>`;
+      for(let bIdx=0; bIdx<burujCount; bIdx++) {
+        const pair = row[bIdx] || {d:0,m:0,s:0};
+        html += `<td><input type="number" step="1" value="${pair.d}" oninput="updateTableField('${tabDef.key}','${deg}',${bIdx},'d',this.value)"></td>`;
+        html += `<td><input type="number" step="1" value="${pair.m}" oninput="updateTableField('${tabDef.key}','${deg}',${bIdx},'m',this.value)"></td>`;
+      }
+      html += `<td><div class="editor-row-actions">
+        <button type="button" class="mini-btn" title="Sisipkan baris derajat sebelum ini" onclick="addTableRow('${tabDef.key}','${deg}','above')">➕▲</button>
+        <button type="button" class="mini-btn below" title="Sisipkan baris derajat setelah ini" onclick="addTableRow('${tabDef.key}','${deg}','below')">➕▼</button>
+        <button type="button" class="mini-btn danger" title="Hapus derajat ini" onclick="deleteTableRow('${tabDef.key}','${deg}')">❌</button>
+      </div></td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  grid.innerHTML = html;
 }
 
-// --- Live Input Updates ---
 window.updateListKey = function(tabKey, idx, keyField, value) { setPath(editorWorkingData[tabKey][idx], keyField, Number(value || 0)); };
 window.updateListField = function(tabKey, idx, field, value) { setPath(editorWorkingData[tabKey][idx], field, Number(value || 0)); };
 window.updateTableField = function(tabKey, deg, burujIdx, field, value) {
-if(!editorWorkingData[tabKey][deg]) editorWorkingData[tabKey][deg] = [];
-if(!editorWorkingData[tabKey][deg][burujIdx]) editorWorkingData[tabKey][deg][burujIdx] = {d:0,m:0,s:0};
-editorWorkingData[tabKey][deg][burujIdx][field] = Number(value || 0);
+  if(!editorWorkingData[tabKey][deg]) editorWorkingData[tabKey][deg] = [];
+  if(!editorWorkingData[tabKey][deg][burujIdx]) editorWorkingData[tabKey][deg][burujIdx] = {d:0,m:0,s:0};
+  editorWorkingData[tabKey][deg][burujIdx][field] = Number(value || 0);
 };
 window.updateTableDeg = function(tabKey, oldDeg, newDegStr) {
-const newDeg = String(Number(newDegStr || 0));
-if(newDeg === oldDeg) return;
-if(editorWorkingData[tabKey][newDeg]) { alert('Derajat ' + newDeg + ' sudah dipakai. Pilih angka lain.'); renderEditorGrid(); return; }
-const val = editorWorkingData[tabKey][oldDeg];
-delete editorWorkingData[tabKey][oldDeg];
-editorWorkingData[tabKey][newDeg] = val;
-renderEditorGrid();
+  const newDeg = String(Number(newDegStr || 0));
+  if(newDeg === oldDeg) return;
+  if(editorWorkingData[tabKey][newDeg]) { alert('Derajat ' + newDeg + ' sudah dipakai. Pilih angka lain.'); renderEditorGrid(); return; }
+  const val = editorWorkingData[tabKey][oldDeg];
+  delete editorWorkingData[tabKey][oldDeg];
+  editorWorkingData[tabKey][newDeg] = val;
+  renderEditorGrid();
 };
 
-// --- TAMBAH / HAPUS BARIS LAYAKNYA SPREADSHEET ---
 window.addListRow = function(tabKey, idx, pos) {
-const tabDef = EDITOR_TABS.find(t => t.key === tabKey);
-const def = prompt('Masukkan nilai awal/identitas (Tahun/Bulan) untuk baris baru ini:', '');
-if(def === null) return;
-const keyVal = Number(def || 0);
-const blank = tabKey === 'bulanIjtima'
-? {index:keyVal, namaArab:'', namaIndonesia:'(Baru)', alamah:{m:0,sa:0,da:0}, hissah:{b:0,d:0,m:0}, wasath:{b:0,d:0,m:0}, khasah:{b:0,d:0,m:0}, markaz:{b:0,d:0,m:0}}
-: {tahun:keyVal, alamah:{m:0,sa:0,da:0}, hissah:{b:0,d:0,m:0}, wasath:{b:0,d:0,m:0}, khasah:{b:0,d:0,m:0}, markaz:{b:0,d:0,m:0}};
-const arr = editorWorkingData[tabKey];
-const insertAt = pos === 'above' ? idx : idx + 1;
-arr.splice(insertAt, 0, blank);
-renderEditorGrid();
+  const def = prompt('Masukkan nilai awal/identitas (Tahun/Bulan) untuk baris baru ini:', '');
+  if(def === null) return;
+  const keyVal = Number(def || 0);
+  const blank = tabKey === 'bulanIjtima' 
+    ? {index:keyVal, namaArab:'', namaIndonesia:'(Baru)', alamah:{m:0,sa:0,da:0}, hissah:{b:0,d:0,m:0}, wasath:{b:0,d:0,m:0}, khasah:{b:0,d:0,m:0}, markaz:{b:0,d:0,m:0}}
+    : {tahun:keyVal, alamah:{m:0,sa:0,da:0}, hissah:{b:0,d:0,m:0}, wasath:{b:0,d:0,m:0}, khasah:{b:0,d:0,m:0}, markaz:{b:0,d:0,m:0}};
+  const arr = editorWorkingData[tabKey];
+  const insertAt = pos === 'above' ? idx : idx + 1;
+  arr.splice(insertAt, 0, blank);
+  renderEditorGrid();
 };
 
 window.deleteListRow = function(tabKey, idx) {
-if(!confirm('Apakah Anda yakin ingin MENGHAPUS baris ini secara permanen?')) return;
-editorWorkingData[tabKey].splice(idx, 1);
-renderEditorGrid();
+  if(!confirm('Apakah Anda yakin ingin MENGHAPUS baris ini secara permanen?')) return;
+  editorWorkingData[tabKey].splice(idx, 1);
+  renderEditorGrid();
 };
 
 window.addTableRow = function(tabKey, refDeg, pos) {
-const dataObj = editorWorkingData[tabKey];
-const burujCount = dataObj[Object.keys(dataObj)[0]] ? dataObj[Object.keys(dataObj)[0]].length : 12;
-const suggestion = pos === 'above' ? (Number(refDeg) - 1) : (Number(refDeg) + 1);
-const input = prompt('Tentukan nomor Derajat untuk baris yang akan disisipkan:', suggestion);
-if(input === null) return;
-const deg = String(Number(input));
-if(dataObj[deg]) { alert('Derajat tersebut sudah ada. Silakan gunakan nilai derajat lain.'); return; }
-dataObj[deg] = Array.from({length: burujCount}, () => ({d:0, m:0, s:0}));
-renderEditorGrid();
+  const dataObj = editorWorkingData[tabKey];
+  const burujCount = dataObj[Object.keys(dataObj)[0]] ? dataObj[Object.keys(dataObj)[0]].length : 12;
+  const suggestion = pos === 'above' ? (Number(refDeg) - 1) : (Number(refDeg) + 1);
+  const input = prompt('Tentukan nomor Derajat untuk baris yang akan disisipkan:', suggestion);
+  if(input === null) return;
+  const deg = String(Number(input));
+  if(dataObj[deg]) { alert('Derajat tersebut sudah ada. Silakan gunakan nilai derajat lain.'); return; }
+  dataObj[deg] = Array.from({length: burujCount}, () => ({d:0, m:0, s:0}));
+  renderEditorGrid();
 };
 
 window.deleteTableRow = function(tabKey, deg) {
-if(!confirm('Apakah Anda yakin ingin MENGHAPUS seluruh nilai derajat ' + deg + ' ini?')) return;
-delete editorWorkingData[tabKey][deg];
-renderEditorGrid();
+  if(!confirm('Apakah Anda yakin ingin MENGHAPUS seluruh nilai derajat ' + deg + ' ini?')) return;
+  delete editorWorkingData[tabKey][deg];
+  renderEditorGrid();
 };
 
 window.addRowEdge = function(tabKey, edge) {
-const tabDef = EDITOR_TABS.find(t => t.key === tabKey);
-if(tabDef.kind === 'list') {
-const arr = editorWorkingData[tabKey];
-if(edge === 'top') window.addListRow(tabKey, 0, 'above');
-else window.addListRow(tabKey, Math.max(arr.length - 1, 0), 'below');
-} else {
-const dataObj = editorWorkingData[tabKey];
-const degs = Object.keys(dataObj).map(Number).sort((a,b) => a - b);
-if (degs.length === 0) { window.addTableRow(tabKey, '0', 'below'); return; }
-const ref = edge === 'top' ? degs[0] : degs[degs.length - 1];
-window.addTableRow(tabKey, String(ref), edge === 'top' ? 'above' : 'below');
-}
+  const tabDef = EDITOR_TABS.find(t => t.key === tabKey);
+  if(tabDef.kind === 'list') {
+    const arr = editorWorkingData[tabKey];
+    if(edge === 'top') window.addListRow(tabKey, 0, 'above');
+    else window.addListRow(tabKey, Math.max(arr.length - 1, 0), 'below');
+  } else {
+    const dataObj = editorWorkingData[tabKey];
+    const degs = Object.keys(dataObj).map(Number).sort((a,b) => a - b);
+    if (degs.length === 0) { window.addTableRow(tabKey, '0', 'below'); return; }
+    const ref = edge === 'top' ? degs[0] : degs[degs.length - 1];
+    window.addTableRow(tabKey, String(ref), edge === 'top' ? 'above' : 'below');
+  }
 };
 
-// --- SIMPAN / RESET ---
 function collectEditorOverrides() {
-initAllEditorWorkingData();
-const ov = loadOverrides() || {};
-EDITOR_TABS.forEach(tabDef => {
-if(editorWorkingData[tabDef.key]) {
-ov[tabDef.key] = JSON.parse(JSON.stringify(editorWorkingData[tabDef.key]));
+  initAllEditorWorkingData();
+  const ov = loadOverrides() || {};
+  EDITOR_TABS.forEach(tabDef => {
+    if(editorWorkingData[tabDef.key]) {
+      ov[tabDef.key] = JSON.parse(JSON.stringify(editorWorkingData[tabDef.key]));
+    }
+  });
+  return ov;
 }
-});
-return ov;
-}
+
 function saveEditorOverrides() {
-try {
-const ov = collectEditorOverrides();
-localStorage.setItem(LS_KEY, JSON.stringify(ov));
-applyOverrides();
-document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status ok">✅ Perubahan berhasil disimpan! Data penambahan/penghapusan baris telah terkunci aman.</div>';
-} catch(e) {
-document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status err">❌ Gagal menyimpan: ' + e.message + '</div>';
+  try {
+    const ov = collectEditorOverrides();
+    localStorage.setItem(LS_KEY, JSON.stringify(ov));
+    applyOverrides();
+    document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status ok">✅ Perubahan berhasil disimpan! Data penambahan/penghapusan baris telah terkunci aman.</div>';
+  } catch(e) {
+    document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status err">❌ Gagal menyimpan: ' + e.message + '</div>';
+  }
 }
-}
+
 function resetEditorOverrides() {
-if(!confirm('Ini akan mereset seluruh modifikasi dan mengembalikan data murni dari kitab asli. Lanjutkan?')) return;
-localStorage.removeItem(LS_KEY);
-window.editorWorkingData = {};
-document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status ok">↺ Data dikembalikan ke bawaan awal. Memuat ulang halaman...</div>';
-location.reload();
+  if(!confirm('Ini akan mereset seluruh modifikasi dan mengembalikan data murni dari kitab asli. Lanjutkan?')) return;
+  localStorage.removeItem(LS_KEY);
+  window.editorWorkingData = {};
+  document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status ok">↺ Data dikembalikan ke bawaan awal. Memuat ulang halaman...</div>';
+  location.reload();
 }
 
 // --- EVENT LISTENERS ---
@@ -931,31 +1094,35 @@ document.getElementById('btnHitung').addEventListener('click', hitungFalak);
 document.getElementById('btnPrint').addEventListener('click', () => window.print());
 document.getElementById('btnShow').addEventListener('click', () => document.getElementById('detailsWrap').classList.toggle('show'));
 document.getElementById('btnShowEkstra').addEventListener('click', () => {
-const el = document.getElementById('ekstraDetailMath');
-el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+  const el = document.getElementById('ekstraDetailMath');
+  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
 });
 document.getElementById('btnShowGlossary').addEventListener('click', () => document.getElementById('glossaryWrap').classList.toggle('show'));
 document.getElementById('btnShowEditor').addEventListener('click', () => {
-document.getElementById('editorWrap').classList.toggle('show');
-if(document.getElementById('editorWrap').classList.contains('show')) {
-initAllEditorWorkingData(); renderEditorTabs(); renderEditorGrid();
-}
+  document.getElementById('editorWrap').classList.toggle('show');
+  if(document.getElementById('editorWrap').classList.contains('show')) {
+    initAllEditorWorkingData(); renderEditorTabs(); renderEditorGrid();
+  }
 });
+
 window.toggleEditorMain = function() {
-const toggle = document.getElementById('editorMainToggle');
-const body = document.getElementById('editorMainBody');
-const willOpen = !body.classList.contains('open');
-toggle.classList.toggle('open', willOpen);
-body.classList.toggle('open', willOpen);
-if(willOpen) { initAllEditorWorkingData(); renderEditorTabs(); renderEditorGrid(); }
+  const toggle = document.getElementById('editorMainToggle');
+  const body = document.getElementById('editorMainBody');
+  const willOpen = !body.classList.contains('open');
+  toggle.classList.toggle('open', willOpen);
+  body.classList.toggle('open', willOpen);
+  if(willOpen) { initAllEditorWorkingData(); renderEditorTabs(); renderEditorGrid(); }
 };
+
 document.getElementById('btnEditorSave').addEventListener('click', saveEditorOverrides);
 document.getElementById('btnEditorReset').addEventListener('click', resetEditorOverrides);
 document.getElementById('btnEditorRecalc').addEventListener('click', () => { hitungFalak(); document.getElementById('editorSaveStatus').innerHTML = '<div class="save-status ok">🔄 Perhitungan diperbarui dengan data termutakhir di tabel.</div>'; });
+
 document.getElementById('zona').addEventListener('change', e => {
-document.getElementById('manualZonaWrap').style.display = e.target.value === 'manual' ? 'block' : 'none';
+  document.getElementById('manualZonaWrap').style.display = e.target.value === 'manual' ? 'block' : 'none';
 });
 document.getElementById('fadlMode').addEventListener('change', e => { document.getElementById('fadlManual').disabled = e.target.value !== 'manual'; });
+
 window.addEventListener('DOMContentLoaded', hitungFalak);
 </script>
 </body>
